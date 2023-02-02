@@ -1,13 +1,21 @@
 import {
   Box,
   Button,
+  Center,
+  Flex,
   FormControl,
   FormLabel,
   Input,
+  InputGroup,
+  InputLeftElement,
   useToast,
   VStack,
 } from "@chakra-ui/react";
 import { Fragment, useState } from "react";
+import { FaUserCircle } from "react-icons/fa";
+import { MdInput } from "react-icons/md";
+import { CiMail } from "react-icons/ci";
+import { AiFillLock } from "react-icons/ai";
 
 export default function Signup() {
   const initialData = { name: "", email: "", password: "" };
@@ -26,8 +34,8 @@ export default function Signup() {
     return true;
   };
 
-  const showAlert = (type, msg) => {
-    toast({ title: msg, type, isClosable: true });
+  const showAlert = (status, msg) => {
+    toast({ title: msg, status, isClosable: true, position: "top" });
   };
 
   const handleSignup = () => {
@@ -39,44 +47,91 @@ export default function Signup() {
   };
   return (
     <Fragment>
-      <Box>
-        <Flex>
-          <Box>
+      <Box bgGradient="linear(to-tr,cyan.400,cyan.300)">
+        <Flex justify="center" align="center" h="100vh" px="4">
+          <Box
+            w={{ base: "full", md: "container.sm" }}
+            boxShadow="dark-lg"
+            borderRadius="lg"
+            p="4"
+            py="8"
+          >
+            <Center py="6">
+              <FaUserCircle size="5rem" />
+            </Center>
             <FormControl>
-              <Box>Signup</Box>
-              <VStack align="start">
+              <VStack align="start" gap="4">
                 <Box w="full">
-                  <FormLabel>Name</FormLabel>
-                  <Input
-                    type="text"
-                    name="name"
-                    placeholder="name"
-                    value={userData.name}
-                    onChange={handleChange}
-                  />
+                  <InputGroup>
+                    <InputLeftElement
+                      border="none"
+                      bg="transparent"
+                      children={<MdInput color="blue" size="1.2rem" />}
+                    />
+                    <Input
+                      variant="flushed"
+                      type="text"
+                      name="name"
+                      placeholder="Name"
+                      value={userData.name}
+                      onChange={handleChange}
+                      borderBottom="2px"
+                      borderColor="blue.400"
+                      color="blue.700"
+                    />
+                  </InputGroup>
                 </Box>
                 <Box w="full">
-                  <FormLabel>Email</FormLabel>
-                  <Input
-                    type="text"
-                    name="email"
-                    placeholder="email"
-                    value={userData.email}
-                    onChange={handleChange}
-                  />
+                  <InputGroup>
+                    <InputLeftElement
+                      border="none"
+                      bg="transparent"
+                      children={<CiMail color="blue" size="1.2rem" />}
+                    />
+                    <Input
+                      variant="flushed"
+                      type="text"
+                      name="email"
+                      placeholder="Email"
+                      value={userData.email}
+                      onChange={handleChange}
+                      borderBottom="2px"
+                      borderColor="blue.400"
+                      color="blue.700"
+                    />
+                  </InputGroup>
                 </Box>
                 <Box w="full">
-                  <FormLabel>Password</FormLabel>
-                  <Input
-                    type="password"
-                    name="password"
-                    placeholder="password"
-                    value={userData.password}
-                    onChange={handleChange}
-                  />
+                  <InputGroup>
+                    <InputLeftElement
+                      border="none"
+                      bg="transparent"
+                      children={<AiFillLock color="blue" size="1.2rem" />}
+                    />
+                    <Input
+                      variant="flushed"
+                      type="password"
+                      name="password"
+                      placeholder="Password"
+                      value={userData.password}
+                      onChange={handleChange}
+                      borderBottom="2px"
+                      borderColor="blue.400"
+                      color="blue.700"
+                    />
+                  </InputGroup>
                 </Box>
                 <Box w="full">
-                  <Button> Signup</Button>
+                  <Button
+                    w="full"
+                    variant="solid"
+                    colorScheme="telegram"
+                    borderRadius="none"
+                    onClick={handleSignup}
+                    boxShadow="xl"
+                  >
+                    SIGNUP
+                  </Button>
                 </Box>
               </VStack>
             </FormControl>
