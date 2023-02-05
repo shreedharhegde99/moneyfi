@@ -16,6 +16,7 @@ const userSchema = new Schema(
 			required: true,
 		},
 		transactions: [{ type: Schema.Types.ObjectId, ref: Transactions }],
+		categories: [],
 	},
 	{ versionKey: false, timestamps: { createdAt: true, updatedAt: true } }
 );
