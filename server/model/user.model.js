@@ -1,4 +1,5 @@
 const { Schema, model } = require("mongoose");
+const Category = require("./category.model");
 const Transactions = require("./transactions.model");
 
 const userSchema = new Schema(
@@ -16,7 +17,7 @@ const userSchema = new Schema(
 			required: true,
 		},
 		transactions: [{ type: Schema.Types.ObjectId, ref: Transactions }],
-		categories: [],
+		categories: [{ type: Schema.Types.ObjectId, ref: Category }],
 	},
 	{ versionKey: false, timestamps: { createdAt: true, updatedAt: true } }
 );
