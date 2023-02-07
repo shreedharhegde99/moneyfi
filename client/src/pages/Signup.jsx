@@ -12,18 +12,22 @@ import {
 	VStack,
 } from "@chakra-ui/react";
 
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { FaUserCircle } from "react-icons/fa";
 import { MdInput } from "react-icons/md";
 import { CiMail } from "react-icons/ci";
 import { AiFillLock } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { signupUser } from "../store/auth/auth.action";
+import { clearMessage } from "../store/info/info.action";
 
 export default function Signup() {
 	const initialData = { name: "", email: "", password: "" };
 	const [userData, setUserData] = useState(initialData);
+	const { loading, message, error, success } = useSelector(
+		(state) => state.info
+	);
 	const toast = useToast();
 	const dispatch = useDispatch();
 
@@ -40,18 +44,26 @@ export default function Signup() {
 	};
 
 	const showAlert = (status, msg) => {
-		toast({ title: msg, status, isClosable: true, position: "top" });
+		toast({ title: msg, status, isClosable: true, position: "top-right" });
 	};
 
-	const handleSignup = () => {
+	const handleSignup = async () => {
 		const valid = validateData();
 		if (!valid) {
 			showAlert("warning", "All fields are mandatory");
 			return;
 		}
 		dispatch(signupUser(userData));
-		setUserData(initialData);
 	};
+
+	if (error) {
+		showAlert("error", message);
+		dispatch(clearMessage());
+	}
+	if (success) {
+		showAlert("success", message);
+		dispatch(clearMessage());
+	}
 
 	return (
 		<Fragment>
@@ -143,6 +155,7 @@ export default function Signup() {
 										borderRadius="none"
 										onClick={handleSignup}
 										boxShadow="xl"
+										isLoading={loading}
 									>
 										SIGNUP
 									</Button>
