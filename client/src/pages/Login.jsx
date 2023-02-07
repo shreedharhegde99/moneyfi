@@ -16,13 +16,16 @@ import { Fragment, useState } from "react";
 import { FaUserCircle } from "react-icons/fa";
 import { CiMail } from "react-icons/ci";
 import { AiFillLock } from "react-icons/ai";
-import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { Link, Navigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../store/auth/auth.action";
+import { clearMessage } from "../store/info/info.action";
 
 export default function Login() {
 	const initialData = { email: "", password: "" };
 	const [userData, setUserData] = useState(initialData);
+	const { message, error, success } = useSelector((state) => state.info);
+	const { isAuth } = useSelector((state) => state.auth);
 	const toast = useToast();
 	const dispatch = useDispatch();
 
@@ -39,7 +42,7 @@ export default function Login() {
 	};
 
 	const showAlert = (status, msg) => {
-		toast({ title: msg, status, isClosable: true, position: "top" });
+		toast({ title: msg, status, isClosable: true, position: "top-right" });
 	};
 
 	const handleLogin = () => {
@@ -52,6 +55,19 @@ export default function Login() {
 		dispatch(loginUser(userData));
 		setUserData(initialData);
 	};
+
+	if (error) {
+		showAlert("error", message);
+		dispatch(clearMessage());
+	}
+	if (success) {
+		showAlert("success", message);
+		dispatch(clearMessage());
+	}
+
+	if (isAuth) {
+		return <Navigate to="/dashboard" />;
+	}
 
 	return (
 		<Fragment>
