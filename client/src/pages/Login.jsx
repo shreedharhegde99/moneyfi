@@ -14,15 +14,17 @@ import {
 
 import { Fragment, useState } from "react";
 import { FaUserCircle } from "react-icons/fa";
-import { MdInput } from "react-icons/md";
 import { CiMail } from "react-icons/ci";
 import { AiFillLock } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { loginUser } from "../store/auth/auth.action";
 
 export default function Login() {
-	const initialData = { name: "", email: "", password: "" };
+	const initialData = { email: "", password: "" };
 	const [userData, setUserData] = useState(initialData);
 	const toast = useToast();
+	const dispatch = useDispatch();
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
@@ -31,8 +33,8 @@ export default function Login() {
 	};
 
 	const validateData = () => {
-		const { name, email, password } = userData;
-		if (name && email && password) return true;
+		const { email, password } = userData;
+		if (email && password) return true;
 		return false;
 	};
 
@@ -46,6 +48,9 @@ export default function Login() {
 			showAlert("warning", "All fields are mandatory");
 			return;
 		}
+
+		dispatch(loginUser(userData));
+		setUserData(initialData);
 	};
 
 	return (
@@ -68,26 +73,6 @@ export default function Login() {
 						</Center>
 						<FormControl>
 							<VStack align="start" gap="4">
-								<Box w="full">
-									<InputGroup>
-										<InputLeftElement
-											border="none"
-											bg="transparent"
-											children={<MdInput color="blue" size="1.2rem" />}
-										/>
-										<Input
-											variant="flushed"
-											type="text"
-											name="name"
-											placeholder="Name"
-											value={userData.name}
-											onChange={handleChange}
-											borderBottom="2px"
-											borderColor="blue.400"
-											color="blue.700"
-										/>
-									</InputGroup>
-								</Box>
 								<Box w="full">
 									<InputGroup>
 										<InputLeftElement
