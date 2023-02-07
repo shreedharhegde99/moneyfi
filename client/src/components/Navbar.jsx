@@ -3,6 +3,7 @@ import { Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { updateUserAuth } from "../store/auth/auth.action";
+import clearToken from "../utils/clearToken";
 import NavbarMini from "./NavbarMini";
 
 export default function Navbar() {
@@ -13,6 +14,7 @@ export default function Navbar() {
 	const handleUserAuthState = () => {
 		if (isAuth) {
 			dispatch(updateUserAuth(false));
+			clearToken();
 		}
 		navigate("/login");
 	};
