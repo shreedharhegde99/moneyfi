@@ -18,11 +18,14 @@ import { MdInput } from "react-icons/md";
 import { CiMail } from "react-icons/ci";
 import { AiFillLock } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { signupUser } from "../store/auth/auth.action";
 
 export default function Signup() {
 	const initialData = { name: "", email: "", password: "" };
 	const [userData, setUserData] = useState(initialData);
 	const toast = useToast();
+	const dispatch = useDispatch();
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
@@ -44,9 +47,10 @@ export default function Signup() {
 		const valid = validateData();
 		if (!valid) {
 			showAlert("warning", "All fields are mandatory");
-
 			return;
 		}
+		dispatch(signupUser(userData));
+		setUserData(initialData);
 	};
 
 	return (
