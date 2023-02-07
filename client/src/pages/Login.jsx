@@ -14,15 +14,20 @@ import {
 
 import { Fragment, useState } from "react";
 import { FaUserCircle } from "react-icons/fa";
-import { MdInput } from "react-icons/md";
 import { CiMail } from "react-icons/ci";
 import { AiFillLock } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser } from "../store/auth/auth.action";
+import { clearMessage } from "../store/info/info.action";
 
 export default function Login() {
-	const initialData = { name: "", email: "", password: "" };
+	const initialData = { email: "", password: "" };
 	const [userData, setUserData] = useState(initialData);
+	const { message, error, success } = useSelector((state) => state.info);
+	const { isAuth } = useSelector((state) => state.auth);
 	const toast = useToast();
+	const dispatch = useDispatch();
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
@@ -31,13 +36,13 @@ export default function Login() {
 	};
 
 	const validateData = () => {
-		const { name, email, password } = userData;
-		if (name && email && password) return true;
+		const { email, password } = userData;
+		if (email && password) return true;
 		return false;
 	};
 
 	const showAlert = (status, msg) => {
-		toast({ title: msg, status, isClosable: true, position: "top" });
+		toast({ title: msg, status, isClosable: true, position: "top-right" });
 	};
 
 	const handleLogin = () => {
@@ -46,7 +51,23 @@ export default function Login() {
 			showAlert("warning", "All fields are mandatory");
 			return;
 		}
+
+		dispatch(loginUser(userData));
+		setUserData(initialData);
 	};
+
+	if (error) {
+		showAlert("error", message);
+		dispatch(clearMessage());
+	}
+	if (success) {
+		showAlert("success", message);
+		dispatch(clearMessage());
+	}
+
+	if (isAuth) {
+		return <Navigate to="/dashboard" />;
+	}
 
 	return (
 		<Fragment>
@@ -68,26 +89,6 @@ export default function Login() {
 						</Center>
 						<FormControl>
 							<VStack align="start" gap="4">
-								<Box w="full">
-									<InputGroup>
-										<InputLeftElement
-											border="none"
-											bg="transparent"
-											children={<MdInput color="blue" size="1.2rem" />}
-										/>
-										<Input
-											variant="flushed"
-											type="text"
-											name="name"
-											placeholder="Name"
-											value={userData.name}
-											onChange={handleChange}
-											borderBottom="2px"
-											borderColor="blue.400"
-											color="blue.700"
-										/>
-									</InputGroup>
-								</Box>
 								<Box w="full">
 									<InputGroup>
 										<InputLeftElement
