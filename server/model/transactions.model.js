@@ -2,6 +2,7 @@ const { Schema, model } = require("mongoose");
 
 const transactionSchema = new Schema(
 	{
+		user: { type: Schema.Types.ObjectId },
 		type: {
 			type: String,
 			enum: ["income", "expense"],

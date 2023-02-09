@@ -7,6 +7,7 @@ async function addNewTransaction({ type, category, amount, date }, userId) {
 		date = parseInt(date);
 
 		let newTransaction = await Transactions.create({
+			user: userId,
 			type,
 			category,
 			date,

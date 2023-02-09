@@ -3,7 +3,7 @@ async function getUserCategories(id) {
 	try {
 		let user = await User.findById(id)
 			.select({ _id: 0, name: 1, categories: 1 })
-			.populate("categories", ["_id", "type", "name"]);
+			.populate("categories", ["_id", "type", "name", "created_by"]);
 
 		return user;
 	} catch (e) {

@@ -1,11 +1,18 @@
-const User = require("../model/user.model");
+const mongoose = require("mongoose");
+const Transaction = require("../model/transactions.model");
 
 async function getTransactionData(id) {
 	try {
-		let { transactions } = await User.findById(id)
-			.select({ _id: 0, transactions: 1 })
-			.populate("transactions");
-		return transactions;
+		let user = mongoose.Types.ObjectId(id);
+
+		let data = await Transaction.aggregate([
+			{ $match: { user } },
+			{ $group: { _id: "$date", transactions: { $push: "$$ROOT" } } },
+			{ $project: { date: "$_id", _id: 0, transactions: 1 } },
+			{ $sort: { date: -1 } },
+		]);
+
+		return data;
 	} catch (e) {
 		console.log("ERROR IN FETCHING TRANSACTION DATA FROM DATABASE", e.message);
 		throw new Error(e.message);
