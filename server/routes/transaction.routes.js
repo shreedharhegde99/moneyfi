@@ -45,7 +45,8 @@ transactionRoute.patch("/", async (req, res) => {
 transactionRoute.delete("/:transId", async (req, res) => {
 	try {
 		let { transId } = req.params;
-		await removeTransaction(transId);
+		console.log(req.id);
+		await removeTransaction(transId, req.id);
 		res
 			.status(200)
 			.send({ ok: true, message: "Transaction deleted successfully " });
