@@ -52,15 +52,35 @@ export default function Navbar() {
 							<NavbarMini handleAuth={handleUserAuthState} />
 						</Show>
 						<Hide below="md">
-							<HStack fontSize="xl" fontWeight="medium">
-								<Box>Dashboard</Box>
+							<HStack fontSize="xl" fontWeight="medium" px="2" py="1">
+								<Link to="/dashboard">
+									<Box
+										px="2"
+										py="1"
+										_hover={{ bg: "cyan.100", borderRadius: "lg" }}
+									>
+										Dashboard
+									</Box>
+								</Link>
 								{!isAuth && (
 									<Link to="/signup">
-										<Box>Signup</Box>
+										<Box
+											px="2"
+											py="1"
+											_hover={{ bg: "cyan.100", borderRadius: "lg" }}
+										>
+											Signup
+										</Box>
 									</Link>
 								)}
 								{
-									<Box cursor="pointer" onClick={handleUserAuthState}>
+									<Box
+										cursor="pointer"
+										px="2"
+										py="1"
+										_hover={{ bg: "cyan.100", borderRadius: "lg" }}
+										onClick={handleUserAuthState}
+									>
 										{isAuth ? "Logout" : "Login"}
 									</Box>
 								}
