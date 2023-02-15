@@ -6,7 +6,7 @@ import {
 	setLoadingStatus,
 	setMessage,
 } from "../info/info.action";
-import { CATEGORIES, TRANSACTIONS } from "./user.actionTypes";
+import { CATEGORIES, TRANSACTIONS, USER } from "./user.actionTypes";
 
 const token = getToken();
 const instance = axios.create({
@@ -28,9 +28,6 @@ const getCategories = () => async (dispatch) => {
 			user: { name, categories },
 		} = await instance({
 			url: "/categories",
-			headers: {
-				Authorization: token,
-			},
 		}).then((res) => res.data);
 
 		dispatch(setCategories(categories));
