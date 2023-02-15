@@ -1,3 +1,4 @@
+import { USER } from "../auth/auth.actionTypes";
 import { CATEGORIES, TRANSACTIONS } from "./user.actionTypes";
 
 const initState = {
@@ -8,6 +9,11 @@ const initState = {
 
 const userReducer = (state = initState, { type, payload }) => {
 	switch (type) {
+		case USER:
+			return {
+				...state,
+				user: payload,
+			};
 		case CATEGORIES:
 			return {
 				...state,
