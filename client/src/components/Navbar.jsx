@@ -53,15 +53,17 @@ export default function Navbar() {
 						</Show>
 						<Hide below="md">
 							<HStack fontSize="xl" fontWeight="medium" px="2" py="1">
-								<Link to="/dashboard">
-									<Box
-										px="2"
-										py="1"
-										_hover={{ bg: "cyan.100", borderRadius: "lg" }}
-									>
-										Dashboard
-									</Box>
-								</Link>
+								{isAuth && (
+									<Link to="/dashboard">
+										<Box
+											px="2"
+											py="1"
+											_hover={{ bg: "cyan.100", borderRadius: "lg" }}
+										>
+											Dashboard
+										</Box>
+									</Link>
+								)}
 								{!isAuth && (
 									<Link to="/signup">
 										<Box
