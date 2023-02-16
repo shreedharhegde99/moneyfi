@@ -23,10 +23,11 @@ import { Fragment, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setErrorStatus } from "../store/info/info.action";
 import { addNewTransaction } from "../store/user/user.action";
+import NewButton from "./NewButton";
 
 export default function AddTransaction() {
 	const initData = {
-		type: "expense",
+		type: "income",
 		category: "salary",
 		amount: 55000,
 		date: "2023-02-15",
@@ -59,36 +60,7 @@ export default function AddTransaction() {
 
 	return (
 		<Fragment>
-			<Box
-				position="fixed"
-				bottom={"10"}
-				right={{ base: "10", md: "20", lg: "50%" }}
-				cursor="pointer"
-				boxShadow="dark-lg"
-				borderRadius="full"
-				fontSize="4xl"
-				fontWeight="bold"
-				display="flex"
-				justifyContent="center"
-				alignItems="center"
-				w="12"
-				h="12"
-				userSelect="none"
-				transition="all 500ms"
-				_hover={{
-					boxShadow: "2px 5px 20px green",
-					transform: { lg: "translateY(-5px)" },
-				}}
-				onClick={onOpen}
-			>
-				<Text
-					bgClip="text"
-					bgGradient="linear(to-r,blue.500,blue.600,blue.700)"
-				>
-					+
-				</Text>
-			</Box>
-
+			<NewButton onClick={onOpen} />
 			<Modal isOpen={isOpen} onClose={onClose}>
 				<ModalOverlay backdropFilter="blur(10px)">
 					<ModalContent p="4">
