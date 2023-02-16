@@ -1,12 +1,28 @@
-import { Box, Flex, Hide, HStack, Show, Text } from "@chakra-ui/react";
+import {
+	Box,
+	Drawer,
+	DrawerBody,
+	DrawerCloseButton,
+	DrawerContent,
+	DrawerHeader,
+	DrawerOverlay,
+	Flex,
+	Hide,
+	HStack,
+	Show,
+	Text,
+	useDisclosure,
+} from "@chakra-ui/react";
 import { Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { updateUserAuth } from "../store/auth/auth.action";
 import clearToken from "../utils/clearToken";
 import NavbarMini from "./NavbarMini";
+import { RxHamburgerMenu } from "react-icons/rx";
 
 export default function Navbar() {
+	const { isOpen, onOpen, onClose } = useDisclosure();
 	const { isAuth } = useSelector((state) => state.auth);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
@@ -31,7 +47,7 @@ export default function Navbar() {
 				bg="azure"
 			>
 				<Flex
-					maxW={{ base: "full", md: "container.md", lg: "container.lg" }}
+					maxW={{ base: "full", md: "container.md", lg: "container.xl" }}
 					m="auto"
 					justify="space-between"
 					align="baseline"
@@ -86,6 +102,26 @@ export default function Navbar() {
 										{isAuth ? "Logout" : "Login"}
 									</Box>
 								}
+								{isAuth && (
+									<Fragment>
+										<Box onClick={onOpen} cursor="pointer">
+											<RxHamburgerMenu size="1.4rem" color="black" />
+										</Box>
+										<Drawer isOpen={isOpen} placement="right" onClose={onClose}>
+											<DrawerOverlay />
+											<DrawerContent>
+												<DrawerCloseButton />
+												<DrawerHeader />
+
+												<DrawerBody>
+													<Link to="/categories">
+														<Box>Categories</Box>
+													</Link>
+												</DrawerBody>
+											</DrawerContent>
+										</Drawer>
+									</Fragment>
+								)}
 							</HStack>
 						</Hide>
 					</Box>
