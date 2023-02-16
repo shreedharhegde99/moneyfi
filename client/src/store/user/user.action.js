@@ -5,6 +5,7 @@ import {
 	setErrorStatus,
 	setLoadingStatus,
 	setMessage,
+	setSuccessStatus,
 } from "../info/info.action";
 import { CATEGORIES, TRANSACTIONS, USER } from "./user.actionTypes";
 
@@ -49,6 +50,7 @@ const addNewCategory = (payload) => async (dispatch) => {
 		dispatch(setLoadingStatus(false));
 		dispatch(setSuccessStatus(true));
 		dispatch(setMessage(res.message));
+		dispatch(getCategories());
 	} catch (e) {
 		console.log("ERROR IN ADDING NEW CATEGORY", e.message);
 		dispatch(setLoadingStatus(false));
@@ -96,6 +98,7 @@ const addNewTransaction = (payload) => async (dispatch) => {
 
 		dispatch(setLoadingStatus(false));
 		dispatch(setMessage(res.message));
+		dispatch(getTransactions());
 	} catch (e) {
 		console.log("ERROR IN FETCHING", e.message);
 		dispatch(setLoadingStatus(false));
@@ -115,6 +118,7 @@ const updateTransaction = (payload) => async (dispatch) => {
 
 		dispatch(setLoadingStatus(false));
 		dispatch(setMessage(res.message));
+		dispatch(getTransactions());
 	} catch (e) {
 		console.log("ERROR IN FETCHING", e.message);
 		dispatch(setLoadingStatus(false));
