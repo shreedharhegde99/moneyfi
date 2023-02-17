@@ -53,9 +53,14 @@ export default function NavbarMini({ handleAuth }) {
 										<Box>Signup</Box>
 									</Link>
 								) : (
-									<Link to="/dashboard">
-										<Box>Dashboard</Box>
-									</Link>
+									<Fragment>
+										<Link to="/dashboard">
+											<Box>Dashboard</Box>
+										</Link>
+										<Link to="/categories">
+											<Box>Categories</Box>
+										</Link>
+									</Fragment>
 								)}
 
 								<Box onClick={handleAuthStatus}>
