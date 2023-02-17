@@ -16,6 +16,8 @@ export default function NewButton({ onClick }) {
 			alignItems="center"
 			w="12"
 			h="12"
+			zIndex="2"
+			bg="white"
 			userSelect="none"
 			transition="all 500ms"
 			_hover={{
