@@ -19,6 +19,7 @@ export default function Transactions() {
 				pb="20"
 				maxH="calc(100vh - 90px)"
 				overflowY="scroll"
+				flex="1"
 			>
 				<Box maxW="lg" m="auto">
 					{transactions.length
