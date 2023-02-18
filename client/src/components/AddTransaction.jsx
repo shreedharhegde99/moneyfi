@@ -23,6 +23,7 @@ import { Fragment, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setErrorStatus } from "../store/info/info.action";
 import { addNewTransaction } from "../store/user/user.action";
+import getDayMs from "../utils/getDayMs";
 import NewButton from "./NewButton";
 
 export default function AddTransaction() {
@@ -51,8 +52,10 @@ export default function AddTransaction() {
 
 	const handleAddTransaction = () => {
 		const { type, category, amount, date } = transaction;
+		let time = getDayMs(date);
+
 		if (type && category && amount && date) {
-			dispatch(addNewTransaction(transaction));
+			dispatch(addNewTransaction({ ...transaction, date: time }));
 			setTransaction(initData);
 			onClose();
 		}
