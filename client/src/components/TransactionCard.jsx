@@ -11,7 +11,7 @@ export default function TransactionCard({ data }) {
 			<Box py="5">
 				<Flex justify="space-between" fontSize="md" fontWeight="bold" px="2">
 					<Box>{getDate(data.date)}</Box>
-					<Box color={total >= 0 ? "green.300" : "red.300"}>
+					<Box color={total >= 0 ? "green.500" : "red.500"}>
 						{`${total >= 0 ? "+" : ""}${total}`}
 					</Box>
 				</Flex>
@@ -21,7 +21,7 @@ export default function TransactionCard({ data }) {
 							justify="space-between"
 							align="center"
 							key={el._id}
-							bg={el.type === "income" ? "green.100" : "red.100"}
+							bg={el.type === "income" ? "green.200" : "red.200"}
 							p="2"
 							px="4"
 							my="2"
