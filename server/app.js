@@ -10,6 +10,7 @@ const signupRouter = require("./routes/signup.routes");
 const loginRouter = require("./routes/login.routes");
 const categoryRouter = require("./routes/categories.routes");
 const transactionsRouter = require("./routes/transaction.routes");
+const chartRouter = require("./routes/chartdata.routes");
 
 var app = express();
 
@@ -29,6 +30,7 @@ app.use("/signup", signupRouter);
 app.use("/login", loginRouter);
 app.use("/categories", categoryRouter);
 app.use("/transactions", transactionsRouter);
+app.use("/chart-data", chartRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

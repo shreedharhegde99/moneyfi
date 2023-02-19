@@ -17,7 +17,7 @@ function validateUser(req, res, next) {
 		req.id = id;
 		next();
 	} catch (e) {
-		console.log("ERROR IN FETCHING", e.message);
+		console.log("ERROR IN VALIDATING USER", e.message);
 		throw new Error(e.message);
 	}
 }
