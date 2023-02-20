@@ -1,5 +1,6 @@
 const transactionRoute = require("express").Router();
 const addNewTransaction = require("../controllers/addNewTransaction");
+const convertDateMs = require("../controllers/convertDateMs");
 const getTransactionData = require("../controllers/getTransactionData");
 const removeTransaction = require("../controllers/removeTransaction");
 const updateTransaction = require("../controllers/updateTransaction");
@@ -10,7 +11,8 @@ transactionRoute.use(validateUser);
 transactionRoute.get("/", async (req, res) => {
 	try {
 		const { id } = req;
-		const transctionsData = await getTransactionData(id);
+		const { from, to } = req.query;
+		const transctionsData = await getTransactionData(id, from, to);
 		return res.status(200).send({ ok: true, data: transctionsData });
 	} catch (e) {
 		console.log("ERROR IN  TRANSACTIONS ROUTE GET METHOD", e.message);
