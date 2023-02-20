@@ -1,5 +1,6 @@
 import { Box, Flex } from "@chakra-ui/react";
 import { Fragment } from "react";
+import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { BiRupee } from "react-icons/bi";
 import getDailyTotal from "../utils/getDailyTotal";
 import getDate from "../utils/getDate";
@@ -22,20 +23,26 @@ export default function TransactionCard({ data }) {
 							align="center"
 							key={el._id}
 							bg={el.type === "income" ? "green.200" : "red.200"}
-							p="2"
+							p="3"
 							px="4"
-							my="2"
+							my="3"
 							borderRadius="2xl"
 						>
-							<Flex gap="4">
-								<Box fontWeight="semibold">
-									{el.type === "income" ? "+" : "-"}
+							<Flex gap="8" align="center">
+								<Box fontWeight="semibold" mb="-0.5">
+									{el.type === "income" ? (
+										<AiOutlineMinus size="1.2rem" />
+									) : (
+										<AiOutlinePlus size="1.2rem" />
+									)}
 								</Box>
-								<Box>{el.category}</Box>
+								<Box fontSize="lg">{el.category}</Box>
 							</Flex>
-							<Flex align="baseline" gap="1">
-								<BiRupee />
-								{el.amount}
+							<Flex align="center" gap="1">
+								<Box>
+									<BiRupee size="1.2rem" />
+								</Box>
+								<Box minW="10">{el.amount}</Box>
 							</Flex>
 						</Flex>
 					))}

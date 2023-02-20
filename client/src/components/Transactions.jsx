@@ -15,7 +15,7 @@ export default function Transactions() {
 		<Fragment>
 			<Box
 				maxW="container.lg"
-				p="6"
+				p={{ base: "2", md: "6" }}
 				pb="20"
 				maxH="calc(100vh - 90px)"
 				overflowY="scroll"
