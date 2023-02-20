@@ -1,10 +1,11 @@
 import { USER } from "../auth/auth.actionTypes";
-import { CATEGORIES, TRANSACTIONS } from "./user.actionTypes";
+import { CATEGORIES, CHART_DATA, TRANSACTIONS } from "./user.actionTypes";
 
 const initState = {
 	user: "",
 	categories: [],
 	transactions: [],
+	chartData: [],
 };
 
 const userReducer = (state = initState, { type, payload }) => {
@@ -23,6 +24,11 @@ const userReducer = (state = initState, { type, payload }) => {
 			return {
 				...state,
 				transactions: payload,
+			};
+		case CHART_DATA:
+			return {
+				...state,
+				chartData: payload,
 			};
 
 		default:

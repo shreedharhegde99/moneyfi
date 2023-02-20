@@ -7,7 +7,7 @@ import {
 	setMessage,
 	setSuccessStatus,
 } from "../info/info.action";
-import { CATEGORIES, TRANSACTIONS, USER } from "./user.actionTypes";
+import { CATEGORIES, CHART_DATA, TRANSACTIONS, USER } from "./user.actionTypes";
 
 const token = getToken();
 const instance = axios.create({
@@ -22,6 +22,7 @@ instance.defaults.headers.post["Content-Type"] = "application/json";
 const setUserDetails = (payload) => ({ type: USER, payload });
 const setCategories = (payload) => ({ type: CATEGORIES, payload });
 const setTransactions = (payload) => ({ type: TRANSACTIONS, payload });
+const setChartData = (payload) => ({ type: CHART_DATA, payload });
 
 const getCategories = () => async (dispatch) => {
 	try {
@@ -144,6 +145,17 @@ const removeTransaction = (id) => async (dispatch) => {
 	}
 };
 
+const getChartData = () => async (dispatch) => {
+	try {
+		let chartData = await instance({
+			url: "/chart-data",
+		}).then((res) => res.data);
+		console.log(`=>  chartData:`, chartData);
+	} catch (e) {
+		console.log("ERROR IN CHART DATA FETCHING", e.message);
+	}
+};
+
 export {
 	getCategories,
 	addNewCategory,
@@ -152,4 +164,5 @@ export {
 	addNewTransaction,
 	updateTransaction,
 	removeTransaction,
+	getChartData,
 };
