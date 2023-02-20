@@ -149,8 +149,8 @@ const getChartData = () => async (dispatch) => {
 	try {
 		let chartData = await instance({
 			url: "/chart-data",
-		}).then((res) => res.data);
-		console.log(`=>  chartData:`, chartData);
+		}).then((res) => res.data.data);
+		dispatch(setChartData(chartData));
 	} catch (e) {
 		console.log("ERROR IN CHART DATA FETCHING", e.message);
 	}
