@@ -72,11 +72,12 @@ const removeCategory = (id) => async (dispatch) => {
 	}
 };
 
-const getTransactions = () => async (dispatch) => {
+const getTransactions = (payload) => async (dispatch) => {
 	dispatch(setLoadingStatus(true));
 	try {
 		let res = await instance({
 			url: "/transactions",
+			params: payload,
 		}).then((res) => res.data);
 		dispatch(setLoadingStatus(false));
 		dispatch(setTransactions(res.data));
@@ -145,10 +146,11 @@ const removeTransaction = (id) => async (dispatch) => {
 	}
 };
 
-const getChartData = () => async (dispatch) => {
+const getChartData = (payload) => async (dispatch) => {
 	try {
 		let chartData = await instance({
 			url: "/chart-data",
+			params: payload,
 		}).then((res) => res.data.data);
 		dispatch(setChartData(chartData));
 	} catch (e) {
