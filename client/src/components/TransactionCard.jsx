@@ -31,9 +31,9 @@ export default function TransactionCard({ data }) {
 							<Flex gap="8" align="center">
 								<Box fontWeight="semibold" mb="-0.5">
 									{el.type === "income" ? (
-										<AiOutlineMinus size="1.2rem" />
-									) : (
 										<AiOutlinePlus size="1.2rem" />
+									) : (
+										<AiOutlineMinus size="1.2rem" />
 									)}
 								</Box>
 								<Box fontSize="lg">{el.category}</Box>
