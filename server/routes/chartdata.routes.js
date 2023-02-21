@@ -5,24 +5,10 @@ const chartRoute = require("express").Router();
 const convertDateMs = require("../controllers/convertDateMs");
 
 chartRoute.use(validateUser);
-
 chartRoute.get("/", async (req, res) => {
 	try {
-		const { start, end } = getCurrentMonth();
-		let data = await getChartData(req.id, start, end);
-
-		return res.status(200).send({ ok: true, data });
-	} catch (e) {
-		console.log("ERROR IN CHART DATA", e.message);
-		return res.status(500).send({ ok: false, message: e.message });
-	}
-});
-
-chartRoute.get("/custom", async (req, res) => {
-	try {
 		const { from, to } = req.query;
-		const [start, end] = [convertDateMs(from), convertDateMs(to)];
-		let data = await getChartData(req.id, start, end);
+		let data = await getChartData(req.id, Number(from), Number(to));
 
 		return res.status(200).send({ ok: true, data });
 	} catch (e) {
