@@ -60,6 +60,9 @@ export default function NavbarMini({ handleAuth }) {
 										<Link to="/categories">
 											<Box>Categories</Box>
 										</Link>
+										<Link to="/charts">
+											<Box>Transaction Charts</Box>
+										</Link>
 									</Fragment>
 								)}
 
