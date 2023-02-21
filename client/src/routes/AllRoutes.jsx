@@ -1,5 +1,6 @@
 import { Fragment } from "react";
 import { Route, Routes } from "react-router-dom";
+import TransactionChart from "../components/TransactionChart";
 import Categories from "../pages/Categories";
 import Dashboard from "../pages/Dashboard";
 import Home from "../pages/Home";
@@ -15,6 +16,7 @@ export default function AllRoutes() {
 				<Route path="/login" element={<Login />} />
 				<Route path="/dashboard" element={<Dashboard />} />
 				<Route path="/categories" element={<Categories />} />
+				<Route path="/charts" element={<TransactionChart />} />
 			</Routes>
 		</Fragment>
 	);
