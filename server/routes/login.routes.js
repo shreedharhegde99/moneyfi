@@ -10,7 +10,9 @@ login.post("/", async (req, res) => {
 		const { email, password } = req.body;
 		let id = await loginUser(email, password);
 		const token = generateToken(id);
-		return res.status(200).send({ ok: true, token });
+		return res
+			.status(200)
+			.send({ ok: true, message: "Login successful", token });
 	} catch (e) {
 		console.log("ERROR IN LOGIN ROUTE", e.message);
 		res.status(400).send({ ok: false, message: e.message });
