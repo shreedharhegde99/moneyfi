@@ -62,13 +62,11 @@ export default function TransactionChart() {
 		<Fragment>
 			<Flex
 				flex="1"
-				maxW={{ base: "full", lg: "xl" }}
 				p="6"
 				borderLeft="1px"
 				borderColor="blackAlpha.400"
-				overflow="scroll"
+				overflowY="scroll"
 				direction="column"
-				justify="center"
 				mt="10"
 			>
 				<Box py="6" w="full">
@@ -79,11 +77,13 @@ export default function TransactionChart() {
 							<Radio value="bar">Bar chart</Radio>
 						</Stack>
 					</RadioGroup>
+				</Box>
+				<Box w={{ base: "full", md: "lg" }} m="auto">
 					{type === "pie" && <Pie data={data} options={options} />}
 					{type === "doughnout" && <Doughnut data={data} options={options} />}
 					{type === "bar" && <Bar data={data} options={options} />}
 				</Box>
-				<Box py="6">
+				<Box py="6" w={{ base: "full", md: "md", lg: "xl" }} m="auto">
 					{chartData.map((el) => (
 						<Flex justify="space-between" py="2" key={el.category}>
 							<Box>{el.category} </Box>
