@@ -100,7 +100,6 @@ const addNewTransaction = (payload) => async (dispatch) => {
 
 		dispatch(setLoadingStatus(false));
 		dispatch(setMessage(res.message));
-		dispatch(getTransactions());
 	} catch (e) {
 		console.log("ERROR IN FETCHING", e.message);
 		dispatch(setLoadingStatus(false));

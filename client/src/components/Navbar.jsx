@@ -64,10 +64,10 @@ export default function Navbar() {
 						</Box>
 					</Link>
 					<Box>
-						<Show below="md">
+						<Hide above="lg">
 							<NavbarMini handleAuth={handleUserAuthState} />
-						</Show>
-						<Hide below="md">
+						</Hide>
+						<Show above="lg">
 							<HStack fontSize="xl" fontWeight="medium" px="2" py="1">
 								{isAuth && (
 									<Link to="/dashboard">
@@ -123,7 +123,7 @@ export default function Navbar() {
 									</Fragment>
 								)}
 							</HStack>
-						</Hide>
+						</Show>
 					</Box>
 				</Flex>
 			</Box>

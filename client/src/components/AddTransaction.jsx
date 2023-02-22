@@ -22,11 +22,15 @@ import {
 import { Fragment, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setErrorStatus } from "../store/info/info.action";
-import { addNewTransaction } from "../store/user/user.action";
+import {
+	addNewTransaction,
+	getChartData,
+	getTransactions,
+} from "../store/user/user.action";
 import getDayMs from "../utils/getDayMs";
 import NewButton from "./NewButton";
 
-export default function AddTransaction() {
+export default function AddTransaction({ dateRange }) {
 	const initData = {
 		type: "income",
 		category: "salary",
@@ -58,6 +62,8 @@ export default function AddTransaction() {
 			dispatch(addNewTransaction({ ...transaction, date: time }));
 			setTransaction(initData);
 			onClose();
+			dispatch(getTransactions(dateRange));
+			dispatch(getChartData(dateRange));
 		}
 	};
 
