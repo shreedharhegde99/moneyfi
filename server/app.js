@@ -11,6 +11,7 @@ const loginRouter = require("./routes/login.routes");
 const categoryRouter = require("./routes/categories.routes");
 const transactionsRouter = require("./routes/transaction.routes");
 const chartRouter = require("./routes/chartdata.routes");
+const tokenAuthRouter = require("./routes/tokenAuth.routes");
 
 var app = express();
 
@@ -31,6 +32,7 @@ app.use("/login", loginRouter);
 app.use("/categories", categoryRouter);
 app.use("/transactions", transactionsRouter);
 app.use("/chart-data", chartRouter);
+app.use("/token-auth", tokenAuthRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
