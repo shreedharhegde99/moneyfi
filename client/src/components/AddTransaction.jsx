@@ -28,6 +28,7 @@ import {
 	getTransactions,
 } from "../store/user/user.action";
 import getDayMs from "../utils/getDayMs";
+import getToken from "../utils/getToken";
 import NewButton from "./NewButton";
 
 export default function AddTransaction({ dateRange }) {
@@ -42,6 +43,8 @@ export default function AddTransaction({ dateRange }) {
 	const { categories } = useSelector((state) => state.user);
 	const { loading } = useSelector((state) => state.info);
 	const dispatch = useDispatch();
+	const userToken = getToken();
+
 	const formError = !(
 		transaction.amount &&
 		transaction.type &&
@@ -59,11 +62,11 @@ export default function AddTransaction({ dateRange }) {
 		let time = getDayMs(date);
 
 		if (type && category && amount && date) {
-			dispatch(addNewTransaction({ ...transaction, date: time }));
+			dispatch(addNewTransaction({ ...transaction, date: time }, userToken));
 			setTransaction(initData);
 			onClose();
-			dispatch(getTransactions(dateRange));
-			dispatch(getChartData(dateRange));
+			dispatch(getTransactions(dateRange, userToken));
+			dispatch(getChartData(dateRange, userToken));
 		}
 	};
 

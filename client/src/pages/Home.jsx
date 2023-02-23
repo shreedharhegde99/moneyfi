@@ -1,12 +1,32 @@
 import { Box, Center, Flex, Image, Text } from "@chakra-ui/react";
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
 import transactionImage from "../assets/transactions.png";
 import chartImage from "../assets/charts.png";
 import categoryImage from "../assets/categories.png";
 import addTransactionImage from "../assets/add_transactions.png";
 import HomePageCards from "../components/HomePageCards";
+import getToken from "../utils/getToken";
+import { useDispatch, useSelector } from "react-redux";
+import { tokenAuthUser } from "../store/auth/auth.action";
 
 export default function Home() {
+	const { isAuth } = useSelector((state) => state.auth);
+	const dispatch = useDispatch();
+
+	const checkUserAuth = () => {
+		if (isAuth) return;
+		const token = getToken();
+		if (!token) return;
+
+		if (token) {
+			dispatch(tokenAuthUser(token));
+		}
+	};
+
+	useEffect(() => {
+		checkUserAuth();
+	}, []);
+
 	return (
 		<Fragment>
 			<Box bg="blackAlpha.50">

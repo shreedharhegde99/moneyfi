@@ -2,6 +2,7 @@ import { Box, HStack, Radio, RadioGroup } from "@chakra-ui/react";
 import { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getChartData, getTransactions } from "../store/user/user.action";
+import getToken from "../utils/getToken";
 
 export default function TransactionRangeSelect({
 	dateRange,
@@ -10,10 +11,11 @@ export default function TransactionRangeSelect({
 }) {
 	const dispatch = useDispatch();
 	const { transactions } = useSelector((state) => state.user);
+	const userToken = getToken();
 
 	const getUserTransactions = () => {
-		dispatch(getTransactions(dateRange));
-		dispatch(getChartData(dateRange));
+		dispatch(getTransactions(dateRange, userToken));
+		dispatch(getChartData(dateRange, userToken));
 	};
 
 	useEffect(() => {

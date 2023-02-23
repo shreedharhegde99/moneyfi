@@ -31,6 +31,7 @@ import NewButton from "../components/NewButton";
 import { MdEdit } from "react-icons/md";
 import { addNewCategory, getCategories } from "../store/user/user.action";
 import { clearMessage } from "../store/info/info.action";
+import getToken from "../utils/getToken";
 
 export default function Categories() {
 	const initData = { type: "income", name: "" };
@@ -42,6 +43,7 @@ export default function Categories() {
 	} = useDisclosure();
 	const dispatch = useDispatch();
 	const toast = useToast();
+	const userToken = getToken();
 
 	const { categories } = useSelector((state) => state.user);
 	const { loading, error, success, message } = useSelector(
@@ -55,7 +57,7 @@ export default function Categories() {
 
 	const handleAddCategory = () => {
 		if (category.name && category.type) {
-			dispatch(addNewCategory(category));
+			dispatch(addNewCategory(category, userToken));
 			setCategory(initData);
 			formClose();
 		}

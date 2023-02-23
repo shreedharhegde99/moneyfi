@@ -9,12 +9,8 @@ import {
 } from "../info/info.action";
 import { CATEGORIES, CHART_DATA, TRANSACTIONS, USER } from "./user.actionTypes";
 
-const token = getToken();
 const instance = axios.create({
 	baseURL,
-	headers: {
-		Authorization: token,
-	},
 });
 
 instance.defaults.headers.post["Content-Type"] = "application/json";
@@ -24,12 +20,15 @@ const setCategories = (payload) => ({ type: CATEGORIES, payload });
 const setTransactions = (payload) => ({ type: TRANSACTIONS, payload });
 const setChartData = (payload) => ({ type: CHART_DATA, payload });
 
-const getCategories = () => async (dispatch) => {
+const getCategories = (token) => async (dispatch) => {
 	try {
 		let {
 			user: { name, categories },
 		} = await instance({
 			url: "/categories",
+			headers: {
+				Authorization: token,
+			},
 		}).then((res) => res.data);
 
 		dispatch(setCategories(categories));
@@ -40,18 +39,21 @@ const getCategories = () => async (dispatch) => {
 	}
 };
 
-const addNewCategory = (payload) => async (dispatch) => {
+const addNewCategory = (payload, token) => async (dispatch) => {
 	dispatch(setLoadingStatus(true));
 	try {
 		let res = await instance({
 			method: "post",
 			url: "/categories",
 			data: payload,
+			headers: {
+				Authorization: token,
+			},
 		}).then((res) => res.data);
 		dispatch(setLoadingStatus(false));
 		dispatch(setSuccessStatus(true));
 		dispatch(setMessage(res.message));
-		dispatch(getCategories());
+		dispatch(getCategories(token));
 	} catch (e) {
 		console.log("ERROR IN ADDING NEW CATEGORY", e.message);
 		dispatch(setLoadingStatus(false));
@@ -72,12 +74,15 @@ const removeCategory = (id) => async (dispatch) => {
 	}
 };
 
-const getTransactions = (payload) => async (dispatch) => {
+const getTransactions = (payload, token) => async (dispatch) => {
 	dispatch(setLoadingStatus(true));
 	try {
 		let res = await instance({
 			url: "/transactions",
 			params: payload,
+			headers: {
+				Authorization: token,
+			},
 		}).then((res) => res.data);
 		dispatch(setLoadingStatus(false));
 		dispatch(setTransactions(res.data));
@@ -89,13 +94,16 @@ const getTransactions = (payload) => async (dispatch) => {
 	}
 };
 
-const addNewTransaction = (payload) => async (dispatch) => {
+const addNewTransaction = (payload, token) => async (dispatch) => {
 	dispatch(setLoadingStatus(true));
 	try {
 		let res = await instance({
 			method: "post",
 			url: "/transactions",
 			data: payload,
+			headers: {
+				Authorization: token,
+			},
 		}).then((res) => res.data);
 
 		dispatch(setLoadingStatus(false));
@@ -108,13 +116,16 @@ const addNewTransaction = (payload) => async (dispatch) => {
 	}
 };
 
-const updateTransaction = (payload) => async (dispatch) => {
+const updateTransaction = (payload, token) => async (dispatch) => {
 	dispatch(setLoadingStatus(true));
 	try {
 		let res = await instance({
 			method: "patch",
 			url: "/transactions",
 			data: payload,
+			headers: {
+				Authorization: token,
+			},
 		}).then((res) => res.data);
 
 		dispatch(setLoadingStatus(false));
@@ -145,11 +156,14 @@ const removeTransaction = (id) => async (dispatch) => {
 	}
 };
 
-const getChartData = (payload) => async (dispatch) => {
+const getChartData = (payload, token) => async (dispatch) => {
 	try {
 		let chartData = await instance({
 			url: "/chart-data",
 			params: payload,
+			headers: {
+				Authorization: token,
+			},
 		}).then((res) => res.data.data);
 		dispatch(setChartData(chartData));
 	} catch (e) {

@@ -59,4 +59,19 @@ const loginUser = (payload) => async (dispatch) => {
 	}
 };
 
-export { signupUser, loginUser, currentUser, updateUserAuth };
+const tokenAuthUser = (payload) => async (dispatch) => {
+	try {
+		let res = await instance({
+			url: "token-auth",
+			headers: {
+				Authorization: payload,
+			},
+		}).then((e) => e.data);
+		dispatch(updateUserAuth(true));
+		console.log(`=>  res:`, res);
+	} catch (e) {
+		console.log("ERROR IN RETURN USER SESSION VALIDATE", e.message);
+	}
+};
+
+export { signupUser, loginUser, currentUser, updateUserAuth, tokenAuthUser };
