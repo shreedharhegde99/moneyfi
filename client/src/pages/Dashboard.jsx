@@ -7,6 +7,7 @@ import TransactionRangeSelect from "../components/TransactionRangeSelect";
 import Transactions from "../components/Transactions";
 import { getCategories } from "../store/user/user.action";
 import getDayMs from "../utils/getDayMs";
+import getToken from "../utils/getToken";
 
 export default function Dashboard() {
 	const dispatch = useDispatch();
@@ -16,6 +17,7 @@ export default function Dashboard() {
 	let initDateState = { from: getDayMs(monthStart), to: getDayMs(new Date()) };
 	const [dateRange, setDateRange] = useState(initDateState);
 	const [rangeVal, setRangeVal] = useState("1");
+	const userToken = getToken();
 
 	const updateDateRange = (val) => {
 		setRangeVal(val);
@@ -33,7 +35,7 @@ export default function Dashboard() {
 	};
 
 	useEffect(() => {
-		dispatch(getCategories());
+		dispatch(getCategories(userToken));
 	}, []);
 
 	return (
