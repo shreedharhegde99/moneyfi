@@ -156,6 +156,7 @@ export default function Signup() {
 										onClick={handleSignup}
 										boxShadow="xl"
 										isLoading={loading}
+										isDisabled={loading}
 									>
 										SIGNUP
 									</Button>

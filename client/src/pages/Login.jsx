@@ -24,7 +24,9 @@ import { clearMessage } from "../store/info/info.action";
 export default function Login() {
 	const initialData = { email: "", password: "" };
 	const [userData, setUserData] = useState(initialData);
-	const { message, error, success } = useSelector((state) => state.info);
+	const { message, error, success, loading } = useSelector(
+		(state) => state.info
+	);
 	const { isAuth } = useSelector((state) => state.auth);
 	const toast = useToast();
 	const dispatch = useDispatch();
@@ -137,6 +139,8 @@ export default function Login() {
 										borderRadius="none"
 										onClick={handleLogin}
 										boxShadow="xl"
+										isLoading={loading}
+										isDisabled={loading}
 									>
 										LOGIN
 									</Button>
