@@ -48,7 +48,7 @@ export default function Dashboard() {
 							rangeVal={rangeVal}
 							updateDateRange={updateDateRange}
 						/>
-						<Transactions />
+						<Transactions dateRange={dateRange} />
 					</Box>
 					<Show above="lg">
 						<TransactionChart />
