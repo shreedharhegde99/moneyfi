@@ -68,7 +68,6 @@ const tokenAuthUser = (payload) => async (dispatch) => {
 			},
 		}).then((e) => e.data);
 		dispatch(updateUserAuth(true));
-		console.log(`=>  res:`, res);
 	} catch (e) {
 		console.log("ERROR IN RETURN USER SESSION VALIDATE", e.message);
 	}

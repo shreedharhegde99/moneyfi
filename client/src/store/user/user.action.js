@@ -130,7 +130,6 @@ const updateTransaction = (payload, token) => async (dispatch) => {
 
 		dispatch(setLoadingStatus(false));
 		dispatch(setMessage(res.message));
-		dispatch(getTransactions());
 	} catch (e) {
 		console.log("ERROR IN FETCHING", e.message);
 		dispatch(setLoadingStatus(false));
@@ -138,12 +137,15 @@ const updateTransaction = (payload, token) => async (dispatch) => {
 		dispatch(setMessage(e.response.data.message));
 	}
 };
-const removeTransaction = (id) => async (dispatch) => {
+const removeTransaction = (id, token) => async (dispatch) => {
 	dispatch(setLoadingStatus(true));
 	try {
 		let res = await instance({
-			method: "patch",
+			method: "delete",
 			url: `/transactions/${id}`,
+			headers: {
+				Authorization: token,
+			},
 		}).then((res) => res.data);
 
 		dispatch(setLoadingStatus(false));
