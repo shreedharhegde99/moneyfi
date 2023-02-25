@@ -7,7 +7,7 @@ import getDayMs from "../utils/getDayMs";
 
 import "./styles/transactions.css";
 
-export default function Transactions() {
+export default function Transactions({ dateRange }) {
 	const { transactions } = useSelector((state) => state.user);
 
 	return (
@@ -23,7 +23,11 @@ export default function Transactions() {
 					{transactions.length ? (
 						<Box>
 							{transactions.map((el) => (
-								<TransactionCard data={el} key={el.date} />
+								<TransactionCard
+									key={el.date}
+									data={el}
+									dateRange={dateRange}
+								/>
 							))}
 						</Box>
 					) : (
