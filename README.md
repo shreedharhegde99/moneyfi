@@ -1,6 +1,6 @@
 ## Moneyfi
 
-    A single app to keep a record for all your income and expense related transactions. Create different categories along with existing default categories to get an insight about category wise expense and income transactions. Also view side by side chart representation of all the transactions. Select a time period to get an overview of all the transactions you made during that period .
+A single app to keep a record for all your income and expense related transactions. Create different categories along with existing default categories to get an insight about category wise expense and income transactions. Also view side by side chart representation of all the transactions. Select a time period to get an overview of all the transactions you made during that period.
 
 ## Deployed link
 
