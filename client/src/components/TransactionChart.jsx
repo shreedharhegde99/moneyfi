@@ -23,7 +23,7 @@ ChartJS.register(
 );
 
 export default function TransactionChart() {
-	const [type, setType] = useState("doughnout");
+	const [type, setType] = useState("pie");
 	const [category, setCategory] = useState([]);
 	const [amount, setAmount] = useState([]);
 
