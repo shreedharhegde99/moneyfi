@@ -29,10 +29,15 @@ export default function Home() {
 
 	return (
 		<Fragment>
-			<Box bg="blackAlpha.50">
-				<Box py="4" maxW="container.xl" m="auto">
-					<Box>
-						<Text fontSize="3xl">Welcome to Moneyfi</Text>
+			<Box bg="cyan.50">
+				<Box py="6" maxW="container.xl" m="auto" px="4">
+					<Box py="6" px="4">
+						<Text
+							fontSize={{ base: "3xl", lg: "4xl" }}
+							textAlign={{ base: "center", lg: "start" }}
+						>
+							Welcome to Moneyfi
+						</Text>
 					</Box>
 					<HomePageCards
 						image={transactionImage}

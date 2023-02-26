@@ -5,21 +5,24 @@ export default function HomePageCards({ title, image, order = -1 }) {
 	return (
 		<Fragment>
 			<Flex
-				direction={{ base: "column", md: "row" }}
+				direction={{ base: "column", lg: "row" }}
 				justify="center"
-				py="4"
+				py={{ base: "4", lg: "14" }}
 				minH="md"
-				bg="cyan.50"
 			>
-				<Box flex="1" order={{ base: -1, md: order }} p="4">
-					<VStack align="center" h={{ base: "2xs", md: "full" }}>
-						<Text fontSize="2xl" m="auto" textAlign="center">
+				<Box flex="1" order={{ base: -1, lg: order }} p="4">
+					<VStack align="center" h={{ base: "2xs", lg: "full" }}>
+						<Text
+							fontSize="2xl"
+							my="auto"
+							textAlign={{ base: "center", lg: "start" }}
+						>
 							{title}
 						</Text>
 					</VStack>
 				</Box>
 				<Box flex="1">
-					<Image src={image} alt={String()} w="full" />
+					<Image src={image} alt={String()} w="full" m="auto" h="full" />
 				</Box>
 			</Flex>
 		</Fragment>
