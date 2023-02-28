@@ -1,19 +1,5 @@
 import {
 	Box,
-	Button,
-	FormControl,
-	FormErrorMessage,
-	FormLabel,
-	HStack,
-	Input,
-	Modal,
-	ModalCloseButton,
-	ModalContent,
-	ModalHeader,
-	ModalOverlay,
-	Radio,
-	RadioGroup,
-	Stack,
 	Table,
 	TableContainer,
 	Tbody,
@@ -24,45 +10,30 @@ import {
 	useDisclosure,
 	useToast,
 } from "@chakra-ui/react";
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AiOutlineMinusCircle, AiOutlinePlusCircle } from "react-icons/ai";
 import NewButton from "../components/NewButton";
 import { MdEdit } from "react-icons/md";
-import { addNewCategory, getCategories } from "../store/user/user.action";
+import { addNewCategory } from "../store/user/user.action";
 import { clearMessage } from "../store/info/info.action";
 import getToken from "../utils/getToken";
+import AddNewCategory from "../components/AddNewCategory";
 
 export default function Categories() {
-	const initData = { type: "income", name: "" };
-	const [category, setCategory] = useState(initData);
-	const {
-		isOpen: formOpen,
-		onOpen: onFormOpen,
-		onClose: formClose,
-	} = useDisclosure();
+	const { isOpen, onOpen, onClose } = useDisclosure();
 	const dispatch = useDispatch();
 	const toast = useToast();
 	const userToken = getToken();
-
 	const { categories } = useSelector((state) => state.user);
-	const { loading, error, success, message } = useSelector(
-		(state) => state.info
-	);
+	const { error, success, message } = useSelector((state) => state.info);
 
-	const handleChange = (e) => {
-		const { name, value } = e.target;
-		setCategory({ ...category, [name]: value });
-	};
-
-	const handleAddCategory = () => {
+	const handleAddCategory = (category) => {
 		if (category.name && category.type) {
 			dispatch(addNewCategory(category, userToken));
-			setCategory(initData);
-			formClose();
+			onClose();
 		}
 	};
-	const formError = !category.name;
 
 	if (error) {
 		toast({ title: message, status: "error", position: "top-right" });
@@ -75,7 +46,7 @@ export default function Categories() {
 
 	return (
 		<Fragment>
-			<NewButton onClick={onFormOpen} />
+			<NewButton onClick={onOpen} />
 			<Box maxW="container.md" m="auto" py="10">
 				<TableContainer>
 					<Table>
@@ -114,61 +85,11 @@ export default function Categories() {
 					</Table>
 				</TableContainer>
 			</Box>
-			<Modal isOpen={formOpen} onClose={formClose}>
-				<ModalOverlay backdropFilter="blur(10px)">
-					<ModalContent p="4">
-						<ModalHeader>Add new Category</ModalHeader>
-						<ModalCloseButton />
-						<FormControl isRequired={true} isInvalid={formError}>
-							<Stack gap="4">
-								<Box>
-									<FormLabel>Category Type</FormLabel>
-									<RadioGroup
-										name="type"
-										defaultValue={category.type}
-										onChange={(value) =>
-											setCategory({ ...category, type: value })
-										}
-									>
-										<HStack>
-											<Radio value="income" colorScheme="green">
-												Income
-											</Radio>
-											<Radio value="expense" colorScheme="red">
-												Expense
-											</Radio>
-										</HStack>
-									</RadioGroup>
-								</Box>
-								<Box>
-									<FormLabel> Category name</FormLabel>
-									<Input
-										name="name"
-										value={category.name}
-										onChange={handleChange}
-										isRequired={true}
-									/>
-								</Box>
-
-								<Box>
-									<Button
-										variant="solid"
-										colorScheme="telegram"
-										w="full"
-										onClick={handleAddCategory}
-										isLoading={loading}
-									>
-										Add Category
-									</Button>
-								</Box>
-							</Stack>
-							{formError && (
-								<FormErrorMessage>All fields are mandatory.! </FormErrorMessage>
-							)}
-						</FormControl>
-					</ModalContent>
-				</ModalOverlay>
-			</Modal>
+			<AddNewCategory
+				addCategory={handleAddCategory}
+				open={isOpen}
+				onClose={onClose}
+			/>
 		</Fragment>
 	);
 }
