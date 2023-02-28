@@ -1,4 +1,4 @@
-import { Box, Flex, Hide, HStack, Show, Text, VStack } from "@chakra-ui/react";
+import { Box, HStack, Show } from "@chakra-ui/react";
 import { Fragment, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import AddTransaction from "../components/AddTransaction";
