@@ -3,7 +3,6 @@ import {
 	Button,
 	FormControl,
 	FormErrorMessage,
-	FormHelperText,
 	FormLabel,
 	HStack,
 	Input,
@@ -16,12 +15,10 @@ import {
 	RadioGroup,
 	Select,
 	Stack,
-	Text,
 	useDisclosure,
 } from "@chakra-ui/react";
 import { Fragment, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setErrorStatus } from "../store/info/info.action";
 import {
 	addNewTransaction,
 	getChartData,

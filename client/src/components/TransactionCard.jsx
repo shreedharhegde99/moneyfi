@@ -1,4 +1,4 @@
-import { Box, Flex, Tooltip, useDisclosure, VStack } from "@chakra-ui/react";
+import { Box, Flex, Tooltip, useDisclosure } from "@chakra-ui/react";
 import { Fragment, useState } from "react";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { BiRupee } from "react-icons/bi";

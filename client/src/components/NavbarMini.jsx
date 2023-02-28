@@ -4,13 +4,8 @@ import {
 	DrawerBody,
 	DrawerCloseButton,
 	DrawerContent,
-	DrawerHeader,
 	DrawerOverlay,
 	IconButton,
-	Menu,
-	MenuButton,
-	MenuItem,
-	MenuList,
 	useDisclosure,
 	VStack,
 } from "@chakra-ui/react";
@@ -21,7 +16,6 @@ import { Link } from "react-router-dom";
 
 export default function NavbarMini({ handleAuth }) {
 	const { isAuth } = useSelector((state) => state.auth);
-	const dispatch = useDispatch();
 	const { isOpen, onOpen, onClose } = useDisclosure();
 
 	const handleAuthStatus = () => {
@@ -48,6 +42,9 @@ export default function NavbarMini({ handleAuth }) {
 						<DrawerCloseButton />
 						<DrawerBody>
 							<VStack align="start" py="4" fontSize="xl">
+								<Link to="/">
+									<Box> Home</Box>
+								</Link>
 								{!isAuth ? (
 									<Link to="/signup" onClick={onClose}>
 										<Box>Signup</Box>

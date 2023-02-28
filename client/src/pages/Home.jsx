@@ -1,9 +1,8 @@
-import { Box, Center, Flex, Image, Text } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 import { Fragment, useEffect } from "react";
 import transactionImage from "../assets/transactions.png";
 import chartImage from "../assets/charts.png";
 import categoryImage from "../assets/categories.png";
-import addTransactionImage from "../assets/add_transactions.png";
 import HomePageCards from "../components/HomePageCards";
 import getToken from "../utils/getToken";
 import { useDispatch, useSelector } from "react-redux";
