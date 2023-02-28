@@ -48,6 +48,9 @@ export default function NavbarMini({ handleAuth }) {
 						<DrawerCloseButton />
 						<DrawerBody>
 							<VStack align="start" py="4" fontSize="xl">
+								<Link to="/">
+									<Box> Home</Box>
+								</Link>
 								{!isAuth ? (
 									<Link to="/signup" onClick={onClose}>
 										<Box>Signup</Box>
